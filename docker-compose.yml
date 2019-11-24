@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${USERNAME}
+      MYSQL_PASSWORD: ${USERPASS}
+      MYSQL_ROOT_PASSWORD: ${ROOTPASS}
+    ports:
+      - "33306:3306"
+    volumes:
+      - ./dbcontents/sql:/docker-entrypoint-initdb.d
