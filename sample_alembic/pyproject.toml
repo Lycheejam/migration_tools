@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "sample_alembic"
+version = "0.1.0"
+description = ""
+authors = ["Lycheejam <lycheejamwow@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+alembic = "^1.3"
+mysql-connector-python = "^8.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
