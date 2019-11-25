@@ -1,0 +1,43 @@
+---
+version: "3.7"
+services:
+
+  proddb:
+    image: mysql:5.7
+    hostname: proddb
+    container_name: proddb
+    environment:
+      MYSQL_DATABASE: sampledb
+      MYSQL_USER: sampleuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33306:3306"
+    volumes:
+      - ./contents/mysql/sql/production:/docker-entrypoint-initdb.d
+      - ./contents/mysql/data/production:/var/lib/mysql
+
+  devdb:
+    image: mysql:5.7
+    hostname: devdb
+    container_name: devdb
+    environment:
+      MYSQL_DATABASE: sampledb
+      MYSQL_USER: sampleuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33307:3306"
+    volumes:
+      - ./contents/mysql/sql/development:/docker-entrypoint-initdb.d
+      - ./contents/mysql/data/development:/var/lib/mysql
+
+  flyway:
+    build:
+      context: './contents/flyway'
+      dockerfile: 'flyway.Dockerfile'
+    hostname: flyway
+    container_name: flyway
+    tty: true
+    volumes:
+      - ./contents/flyway/configs:/flyway-5.2.4/conf
